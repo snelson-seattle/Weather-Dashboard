@@ -1,0 +1,44 @@
+header {
+    position: relative;
+    width: 100%;
+    background-color: darkslategray;
+    color: white;
+    height: 80px;
+}
+
+header h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+}
+
+.col-4 {
+    border: 1px solid black;
+}
+
+.col-8 {
+    border: 1px solid black;
+}
+
+.container {
+    width: 100%;
+    margin: 0;
+}
+
+.city-search {
+    float: left;
+    height: 600px;
+}
+
+.weather-today {
+    padding: 10px;
+    margin: 0;
+}
+
+.weather-5-day {
+    padding: 10px;
+    margin: 0;
+}
