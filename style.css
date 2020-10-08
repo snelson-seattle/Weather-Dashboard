@@ -28,11 +28,6 @@ header h1 {
     margin: 0;
 }
 
-.city-search {
-    float: left;
-    height: 600px;
-}
-
 .weather-today {
     padding: 10px;
     margin: 0;
