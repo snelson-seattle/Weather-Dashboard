@@ -15,6 +15,11 @@ header h1 {
     text-align: center;
 }
 
+.card {
+    width: 10rem;
+    text-align: center;
+}
+
 .col-4 {
     border: 1px solid black;
 }
@@ -23,18 +28,12 @@ header h1 {
     border: 1px solid black;
 }
 
-.container {
-    width: 100%;
-    margin: 0;
-}
-
 .weather-today {
     padding: 10px;
     margin: 0;
 }
 
-.weather-5-day {
-    padding: 10px;
+.weather-5-day {    
     margin: 0;
 }
 
