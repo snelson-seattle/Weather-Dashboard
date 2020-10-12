@@ -15,6 +15,7 @@ $(document).ready(function() {
         // Save to the city list if not already there
         if(!savedCites.includes($("#city-search").val().toUpperCase()) && $("#city-search").val() != ""){
             let cityList = $("#city-list");
+            let keyword = cityList.val();
             let newCity = $("<p>").text(keyword).addClass("city-btn");
             cityList.append(newCity);
             savedCites.push(keyword.toUpperCase());           
