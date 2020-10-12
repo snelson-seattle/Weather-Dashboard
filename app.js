@@ -135,11 +135,11 @@ $(document).ready(function() {
                             iconEl.attr("src", iconURL);
                             break;
                         case "Drizzle":
-                            iconURL = "http://openweathermap.org/img/wn/09d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/09d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Dust":
-                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Fog":
