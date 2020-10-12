@@ -56,7 +56,7 @@ $(document).ready(function() {
         const apiKey = "9c8404bb3c829b4504d089a4a92aa669";  // openweathermap.org API key
         
         // Capture Search Criteria
-        let keyword = $("#city-search").val().toUpperCase();
+        keyword = $("#city-search").val().toUpperCase();
 
         // Construct endpoint URL for current day forecast request
         let queryURL = "https://api.openweathermap.org/data/2.5/forecast/?q=" + keyword + "&appid=" + apiKey;
@@ -123,15 +123,15 @@ $(document).ready(function() {
                     let iconURL = "";
                     switch(response.list[i].weather[0].main){
                         case "Ash":
-                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Clear":
-                            iconURL = "http://openweathermap.org/img/wn/01d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/01d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Clouds":
-                            iconURL = "http://openweathermap.org/img/wn/02d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/02d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Drizzle":
@@ -143,43 +143,43 @@ $(document).ready(function() {
                             iconEl.attr("src", iconURL);
                             break;
                         case "Fog":
-                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Haze":
-                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Mist":
-                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Rain":
-                            iconURL = "http://openweathermap.org/img/wn/10d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/10d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Sand":
-                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Smoke":
-                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Snow":
-                            iconURL = "http://openweathermap.org/img/wn/13d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/13d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Squall":
-                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                         case "Thunderstorm":
-                            iconURL = "http://openweathermap.org/img/wn/11d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/11d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;  
                         case "Tornado":
-                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
                             iconEl.attr("src", iconURL);
                             break;
                     }
