@@ -6,30 +6,58 @@ $(document).ready(function() {
 
     $(".city-btn").on("click", function(){
         $("#city-search").val($(this).text());
+        getWeatherData();
     });
 
     $("#search-btn").on("click", function(event){
-        event.preventDefault(); // Prevent default submit action
-        
-        // Constants
-        const apiKey = "9c8404bb3c829b4504d089a4a92aa669";  // openweathermap.org API key
-     
-      
-        // Capture Search Criteria
-        let keyword = $("#city-search").val().toUpperCase();
+        event.preventDefault(); // Prevent default submit action 
 
         // Save to the city list if not already there
-        if(!savedCites.includes(keyword)){
+        if(!savedCites.includes($("#city-search").val().toUpperCase()) && $("#city-search").val() != ""){
             let cityList = $("#city-list");
             let newCity = $("<p>").text(keyword).addClass("city-btn");
             cityList.append(newCity);
-            savedCites.push(keyword.toUpperCase());
-            console.log(savedCites);
+            savedCites.push(keyword.toUpperCase());           
             localStorage.setItem("Searched-Cities", JSON.stringify(savedCites));
-        }  
+        } 
+        
+        getWeatherData();
+    });    
+
+    $("#list-toggler").on("click", function(){
+        if($(this).attr("data-state") === "hidden"){
+            $(this).text($(this).attr("data-hide"));
+            $(this).attr("data-state", "visible");
+        }else {
+            $(this).text($(this).attr("data-view"));
+            $(this).attr("data-state", "hidden");
+        }
+    });
+    
+    // Function that checks for previously searched city names, and loads them onto the page if found
+    function loadSavedCities () {
+        if(JSON.parse(localStorage.getItem("Searched-Cities"))){
+            savedCites = JSON.parse(localStorage.getItem("Searched-Cities"));            
+        }    
+        for(let i = 0; i < savedCites.length; i++){
+            let savedCityList = $("#city-list");
+            let li = $("<li>");
+            let savedCity = $("<p>").text(savedCites[i]).addClass("city-btn");
+            li.append(savedCity);
+            savedCityList.append(li);
+        }
+       
+    }   
+
+    function getWeatherData (){
+        // Constants
+        const apiKey = "9c8404bb3c829b4504d089a4a92aa669";  // openweathermap.org API key
+        
+        // Capture Search Criteria
+        let keyword = $("#city-search").val().toUpperCase();
 
         // Construct endpoint URL for current day forecast request
-        let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + keyword + "&appid=" + apiKey;
+        let queryURL = "https://api.openweathermap.org/data/2.5/forecast/?q=" + keyword + "&appid=" + apiKey;
       
         // Construct endpoint URL for UV index request
         let uvURL = "https://api.openweathermap.org/data/2.5/uvi?";
@@ -37,8 +65,7 @@ $(document).ready(function() {
         $.ajax({
             url: queryURL,
             method: "GET"
-          }).then(function(response) {   
-            console.log(response);      
+        }).then(function(response) {      
             let temperature = ((response.list[0].main.temp - 273.15) * 1.8) + 32;
             let windSpeed = response.list[0].wind.speed * 2.237;
             let today = response.list[0].dt_txt.slice(0, 10);
@@ -62,7 +89,18 @@ $(document).ready(function() {
                 currentForecast.append(humidityEl);
                 let windEl = $("<p>").text("Wind Speed: " + windSpeed.toFixed(1) + " MPH");
                 currentForecast.append(windEl);
-                let uvEl = $("<p>").text("UV Index: " + uvIndex.value);
+                let uvEl = $("<p>").text("UV Index: " + uvIndex.value.toFixed(1));
+                if(uvIndex.value < 3){
+                    uvEl.addClass("uv-low");
+                }else if(uvIndex.value >= 3 && uvIndex.value < 6){
+                    uvEl.addClass("uv-moderate");
+                }else if(uvIndex.value >= 6 && uvIndex.value < 8){
+                    uvEl.addClass("uv-high");
+                 }else if(uvIndex.value >= 8 && uvIndex.value < 11){
+                    uvEl.addClass("uv-very-high");
+                }else {
+                    uvEl.addClass("uv-extreme");
+                }
                 currentForecast.append(uvEl);
   
                 // Build 5 Day Forecast UI
@@ -73,23 +111,75 @@ $(document).ready(function() {
                 let row = $("<div>").addClass("row");
                 fiveDayForecast.append(row);
   
+                // Build the Weather Cards for each day
                 for(let i = 5; i <= 37; i += 8){
-                    let column = $("<div>").addClass("column");
+                    let column = $("<div>").addClass("col-xs-12 column");
                     let weatherCard = $("<div>").addClass("card text-white bg-info");
                     let cardBody = $("<div>").addClass("card-body");
                     let cardTitle = $("<h5>").addClass("card-title").text(response.list[i].dt_txt.slice(0,10));
-                    let iconEl = $("<h1>");
+                    let iconEl = $("<img>");
+                    let iconURL = "";
                     switch(response.list[i].weather[0].main){
+                        case "Ash":
+                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
                         case "Clear":
-                            iconEl.addClass("fas fa-sun");
+                            iconURL = "http://openweathermap.org/img/wn/01d@2x.png"
+                            iconEl.attr("src", iconURL);
                             break;
                         case "Clouds":
-                            iconEl.addClass("fas fa-cloud");
+                            iconURL = "http://openweathermap.org/img/wn/02d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
+                        case "Drizzle":
+                            iconURL = "http://openweathermap.org/img/wn/09d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
+                        case "Dust":
+                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
+                        case "Fog":
+                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
+                        case "Haze":
+                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
+                        case "Mist":
+                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconEl.attr("src", iconURL);
                             break;
                         case "Rain":
-                            iconEl.addClass("fas fa-cloud-rain");
+                            iconURL = "http://openweathermap.org/img/wn/10d@2x.png"
+                            iconEl.attr("src", iconURL);
                             break;
-
+                        case "Sand":
+                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
+                        case "Smoke":
+                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
+                        case "Snow":
+                            iconURL = "http://openweathermap.org/img/wn/13d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
+                        case "Squall":
+                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
+                        case "Thunderstorm":
+                            iconURL = "http://openweathermap.org/img/wn/11d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;  
+                        case "Tornado":
+                            iconURL = "http://openweathermap.org/img/wn/50d@2x.png"
+                            iconEl.attr("src", iconURL);
+                            break;
                     }
                     let fTemp = ((response.list[i].main.temp - 273.15) * 1.8) + 32;
                     let fiveTempEl = $("<p>").text("Temp: " + fTemp.toFixed(1) + " F");
@@ -104,37 +194,10 @@ $(document).ready(function() {
                     column.append(weatherCard);                
                     row.append(column);
                  }
-            });   
-   
-        });
-
-    
-
-    });    
-
-    function loadSavedCities () {
-        if(JSON.parse(localStorage.getItem("Searched-Cities"))){
-            savedCites = JSON.parse(localStorage.getItem("Searched-Cities"));            
-        }    
-        for(let i = 0; i < savedCites.length; i++){
-            let savedCityList = $("#city-list");
-            let savedCity = $("<p>").text(savedCites[i]).addClass("city-btn");
-            savedCityList.append(savedCity);
-        }
-       
+            });
+        });          
     }
-
 });
 
-// <div class="column">
-//     <div class="card">..</div>
-//   </div>
-//   <div class="column">
-//     <div class="card">..</div>
-//   </div>
-//   <div class="column">
-//     <div class="card">..</div>
-//   </div>
-//   <div class="column">
-//     <div class="card">..</div>
-//   </div>
+
+

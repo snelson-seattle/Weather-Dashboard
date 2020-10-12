@@ -1,3 +1,7 @@
+button {
+    margin-right: 5px;
+}
+
 header {
     position: relative;
     width: 100%;
@@ -10,36 +14,50 @@ header h1 {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
+    transform: translate(-50%, -50%);    
     text-align: center;
 }
 
+h2 {
+    display: inline;
+}
+
 .card {
+    margin: 5px;
     width: 10rem;
     text-align: center;
 }
 
-.col-4 {
-    border: 1px solid black;
-}
-
-.col-8 {
-    border: 1px solid black;
-}
-
-.weather-today {
-    padding: 10px;
-    margin: 0;
-}
-
-.weather-5-day {    
-    margin: 0;
-}
-
 #city-list p {
-    border: 1px solid whitesmoke;
+    border: 1px solid lightgray;
+    height: 50px;
+    font-size: 2.0rem;
     background-color: whitesmoke;
     text-align: center;
     margin-top: 5px;
 }
+
+.uv-extreme {
+    background-color: purple;
+    color: white;
+}
+
+.uv-very-high {
+    background-color: red;
+    color: white;
+}
+
+.uv-high {
+    background-color: orange;
+    color: white;
+}
+
+.uv-moderate {
+    background-color: yellow;
+}
+
+.uv-low {
+    background-color: green;
+    color: white;
+}
+

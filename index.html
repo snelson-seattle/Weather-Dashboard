@@ -22,33 +22,56 @@
 
 </head>
 <body>
-    <header class="container">
-        <h1>Weather Dashboard</h1>
+    <header class="container-fluid">
+        <h1><span class="fas fa-cloud"></span> Weather Dashboard</h1>
     </header>
 
     <main>
-        <div class="row">
-            <section class="col-md-4">
-                <h3>Search for a city:</h3>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="enter city name" id="city-search">
-                    <button class="btn btn-primary" type="submit"><span class="fas fa-search fa-lg" id="search-btn"></span></button>
-                </form>
-                <div id="city-list">
-                    <!--Searched cities go here-->
-                </div>
-            </section>
-            <section class="col-md-8">
-                <div class="row weather-today">
-                    <section class="col-md-12" id="current-forecast">
-                        <!-- Current Day Forecast gets appended here -->                        
-                    </section>
-                </div>
-                <div class="row" id="five-day-forecast">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                   
+                    <h2>City Search</h2>                   
+                                                                 
+                            
+                    <form class="form-inline my-2 my-lg-0">
+                        <input id="city-search" class="form-control mr-sm-2" type="search" placeholder="Enter city name" aria-label="Search">
+                        <button class="btn btn-primary my-2 my-sm-0" type="submit"><span class="fas fa-search fa-lg" id="search-btn"></span></button>                            
+                    </form>
+                         
+                        
                     
-                </div>
-            </section>            
-        </div>
+            
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" href="#collapse1" data-view="View Saved Cities" data-hide="Hide Saved Cities" data-state="hidden" id="list-toggler">View Saved Cities</a>
+                            </h4>
+                          </div>
+                          <div id="collapse1" class="panel-collapse collapse">
+                            <ul class="list-group" id="city-list"></ul>
+                              <!-- Saved Cities go here -->
+                            </ul>                           
+                          </div>
+                        </div>
+                    </div> 
+                </div>    
+            
+                <div class="col-xs-12 col-md-8">
+                    <div class="row current-forecast">
+                        <div id="current-forecast">                            
+                            <!-- Current Day Forecast gets appended here -->                        
+                        </div>
+                    </div>
+                    <div class="row five-day-forecast">
+                        <div class="col-xs-12 col-md-8" id="five-day-forecast">
+                            <!-- Current Day Forecast gets appended here -->                        
+                        </div>
+                    </div>                    
+                </div>              
+            </div>            
+        </div>        
     </main>
 
     <!--Bootstrap Javascript Files-->
